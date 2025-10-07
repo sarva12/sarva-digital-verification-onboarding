@@ -1,0 +1,1017 @@
+xrun(64): 25.03-s003: (c) Copyright 1995-2025 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	25.03-s003: Started on Sep 27, 2025 at 20:16:15 EDT
+xrun
+	-64bit
+	-sv
+	-linedebug
+	-access +rwc
+	-timescale 1ns/10ps
+	+define+SIM=1+CADENCE=1
+	+testname=
+	+incdir+sym_links
+	-coverage all
+	-licqueue
+	-covoverwrite
+	-f sym_links/sim_no_path.include
+		sym_links/calculator_pkg.sv
+		sym_links/adder32.sv
+		sym_links/controller.sv
+		sym_links/full_adder.sv
+		sym_links/result_buffer.sv
+		sym_links/sky130_sram_2kbyte_1rw1r_32x512_8.sv
+		sym_links/top_lvl.sv
+		sym_links/calc_seq_item.svh
+		sym_links/calc_tb_pkg.sv
+		sym_links/calc_driver.svh
+		sym_links/calc_monitor.svh
+		sym_links/calc_sb.svh
+		sym_links/calc_sequencer.svh
+		sym_links/calc_if.sv
+		sym_links/calc_tb_top.sv
+	-logfile simulation.log
+
+   User defined plus("+") options:
+	+testname=
+
+xrun: *W,BADPRF: The -linedebug option may have an adverse performance impact.
+Recompiling... reason: file './sym_links/calc_tb_top.sv' is newer than expected.
+	expected: Sat Sep 27 20:14:50 2025
+	actual:   Sat Sep 27 20:16:12 2025
+file: sym_links/calc_tb_top.sv
+	module worklib.calc_tb_top:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		calculator_pkg
+		$unit_0x201ca083
+		calc_tb_pkg
+		calc_tb_top
+
+	Extracting FSMs for coverage:
+		worklib.controller
+			FSM extracted for state register state
+		worklib.sky130_sram_2kbyte_1rw1r_32x512_8
+		worklib.full_adder
+		worklib.adder32
+		worklib.result_buffer
+		worklib.top_lvl
+		worklib.calc_tb_top
+	Total FSMs extracted = 1
+	Building instance overlay tables: ..
+xmelab: *W,COVFDP: FSM description matching across instance of a module for "COVFDM" warning has been moved from elaboration to simulation dumping. To restore old matching behavior, use "set_backward_compat -COVFDM_during_elab". Also, it is recommended to use set_parameterized_module_coverage CCF command to avoid coverage loss due to FSM description difference across instances of a module.
+xmelab: *W,COVFHT: FSM hold transitions (transitions to the current state) are not extracted for any FSM in default mode.
+.................. Done
+	Enabling instrumentation for coverage types: block expression FSM toggle functional
+xmelab: *W,COVDCL: By default expression coverage is scored only for Verilog logical operators (|| and &&) and VHDL logical operators (OR, AND, NOR, and NAND), and is scored only in condition expressions. To score coverage for other operators and for expressions in other statements, use the "set_expr_coverable_operators" and "set_expr_coverable_statements" coverage configuration file commands with suitable options at elaboration.
+	Generating native compiled code:
+		worklib.calc_tb_top:sv <0x5bcd9bf2>
+			streams:  34, words: 69767
+xmelab: *W,COVNOEN: By default, toggle coverage is not supported for systemverilog enumerated nets and variables. To enable toggle coverage of these objects, specify the 'set_toggle_scoring -sv_enum' command in the coverage configuration file.
+  reg [DATA_WIDTH-1:0]    mem [0:RAM_DEPTH-1];
+                            |
+xmelab: *W,COVMDD (./sym_links/sky130_sram_2kbyte_1rw1r_32x512_8.sv,52|28): Toggle coverage for bit, logic, reg, wire, enum and struct multi-dimensional static arrays and vectors is not supported by default. To enable toggle coverage for enum multi-dimensional static arrays specify 'set_toggle_scoring -sv_enum enable_mda' and for other multi-dimensional static arrays, specify 'set_toggle_scoring -sv_mda [<max_bit_base2_exponent>] [-sv_mda_of_struct]' ccf command in the coverage configuration file.
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                      Instances  Unique
+		Modules:                     39       7
+		Interfaces:                   1       1
+		Verilog packages:             2       2
+		Registers:                  239     253
+		Scalar wires:               244       -
+		Expanded wires:              64       2
+		Vectored wires:              38       -
+		Named events:                 4       4
+		Always blocks:               34      29
+		Initial blocks:              11      11
+		Clocking blocks:              1       1
+		Clocking items:              17      17
+		Parallel blocks:              1       1
+		Cont. assignments:           41      10
+		Pseudo assignments:         135       -
+		Assertions:                   4       4
+		Compilation units:            1       1
+		SV Class declarations:        5      10
+		SV Class specializations:     5       5
+		Simulation timescale:      10ps
+	Writing initial simulation snapshot: worklib.calc_tb_top:sv
+Loading snapshot worklib.calc_tb_top:sv .................... Done
+SVSEED default: 1
+xcelium> source /tools/software/cadence/xcelium/latest/tools/xcelium/files/xmsimrc
+xcelium> run
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+=== TEST PLAN: Basic Computation ===
+Test: Normal addition with no overflow - SRAM addr 0x00
+[DRV] Initializing SRAM A at address 0 with data 2
+[DRV] Initializing SRAM B at address 0 with data 3
+[DRV] starting calculation with R: [0:0], W: [0:0]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+Test: Normal Addition with overflow - SRAM addr 0x01
+[DRV] Initializing SRAM A at address 1 with data ffffffff
+[DRV] Initializing SRAM B at address 1 with data 1
+[DRV] starting calculation with R: [1:1], W: [1:1]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+=== TEST PLAN: Edge Cases ===
+Test: Zero addition - SRAM addr 0x02
+[DRV] Initializing SRAM A at address 2 with data 0
+[DRV] Initializing SRAM B at address 2 with data 0
+[DRV] starting calculation with R: [2:2], W: [2:2]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+Test: Max + 0 - SRAM addr 0x03
+[DRV] Initializing SRAM A at address 3 with data ffffffff
+[DRV] Initializing SRAM B at address 3 with data 0
+[DRV] starting calculation with R: [3:3], W: [3:3]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+=== TEST PLAN: Data Flow and SRAM Integrity ===
+Test: Data Read - Write 0x1234 to address 0x10, read back
+[DRV] Initializing SRAM A at address 10 with data 1234
+[DRV] Initializing SRAM B at address 10 with data 5678
+[DRV] starting calculation with R: [16:16], W: [16:16]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+Test: Data Write Overwrite - Write 0x5678 to address 0x11
+[DRV] Initializing SRAM A at address 11 with data 1111
+[DRV] Initializing SRAM B at address 11 with data 2222
+[DRV] starting calculation with R: [17:17], W: [17:17]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 11 with data 5678
+[DRV] Initializing SRAM B at address 11 with data 9abc
+[DRV] starting calculation with R: [17:17], W: [17:17]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+=== TEST PLAN: Timing & Reset Tests ===
+Test: Reset functionality during operation
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 20 with data 100
+[DRV] Initializing SRAM B at address 20 with data 200
+[DRV] starting calculation with R: [32:34], W: [48:50]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[PASS] Reset during operation -> IDLE state
+=== TEST PLAN: Random Constrained Testing ===
+[DRV] Initializing SRAM A at address 20 with data 725a48ee
+[DRV] Initializing SRAM B at address 20 with data 3a7f3ad3
+[DRV] Initializing SRAM A at address 21 with data 43c2393a
+[DRV] Initializing SRAM B at address 21 with data e5c8a49c
+[DRV] Initializing SRAM A at address 22 with data 677a7ce7
+[DRV] Initializing SRAM B at address 22 with data e8ffa1be
+[DRV] Initializing SRAM A at address 23 with data cef88e06
+[DRV] Initializing SRAM B at address 23 with data 122fda7a
+[DRV] Initializing SRAM A at address 24 with data 27b13d00
+[DRV] Initializing SRAM B at address 24 with data a40529f3
+[DRV] Initializing SRAM A at address 25 with data f908a297
+[DRV] Initializing SRAM B at address 25 with data e8958783
+[DRV] Initializing SRAM A at address 26 with data 2ef9e79a
+[DRV] Initializing SRAM B at address 26 with data aeecabe2
+[DRV] Initializing SRAM A at address 27 with data bd849e6a
+[DRV] Initializing SRAM B at address 27 with data 3f598df7
+[DRV] Initializing SRAM A at address 28 with data c8d92a2e
+[DRV] Initializing SRAM B at address 28 with data 1279937b
+[DRV] Initializing SRAM A at address 29 with data 7e466fd7
+[DRV] Initializing SRAM B at address 29 with data 57061151
+[DRV] Initializing SRAM A at address 2a with data 89e2ccd5
+[DRV] Initializing SRAM B at address 2a with data 125d77a6
+[DRV] Initializing SRAM A at address 2b with data d4f80f95
+[DRV] Initializing SRAM B at address 2b with data 67d345c9
+[DRV] Initializing SRAM A at address 2c with data f934edc0
+[DRV] Initializing SRAM B at address 2c with data 52b7a1ca
+Random Test 1: R[32:44] W[129:135] (read_range=12, write_range=6)
+[DRV] starting calculation with R: [32:44], W: [129:135]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 4c with data 76bf00ec
+[DRV] Initializing SRAM B at address 4c with data ad1bccbf
+[DRV] Initializing SRAM A at address 4d with data f4ca8257
+[DRV] Initializing SRAM B at address 4d with data ed93cfe1
+[DRV] Initializing SRAM A at address 4e with data 92e1d545
+[DRV] Initializing SRAM B at address 4e with data b73cf980
+[DRV] Initializing SRAM A at address 4f with data bb59706
+[DRV] Initializing SRAM B at address 4f with data 4496a0f5
+[DRV] Initializing SRAM A at address 50 with data 6d273cb4
+[DRV] Initializing SRAM B at address 50 with data 9b6eab67
+[DRV] Initializing SRAM A at address 51 with data a134b42d
+[DRV] Initializing SRAM B at address 51 with data 42ae7c2a
+[DRV] Initializing SRAM A at address 52 with data 93a34ad1
+[DRV] Initializing SRAM B at address 52 with data 92e490dc
+[DRV] Initializing SRAM A at address 53 with data a06f9600
+[DRV] Initializing SRAM B at address 53 with data 2d92e53b
+[DRV] Initializing SRAM A at address 54 with data b6f3d94f
+[DRV] Initializing SRAM B at address 54 with data e73afac6
+Random Test 2: R[76:84] W[193:197] (read_range=8, write_range=4)
+[DRV] starting calculation with R: [76:84], W: [193:197]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 17 with data 7f233047
+[DRV] Initializing SRAM B at address 17 with data 3e22dcec
+[DRV] Initializing SRAM A at address 18 with data 3bc43e0e
+[DRV] Initializing SRAM B at address 18 with data 4035b258
+[DRV] Initializing SRAM A at address 19 with data 54bc15d8
+[DRV] Initializing SRAM B at address 19 with data 1a5248
+[DRV] Initializing SRAM A at address 1a with data e812ea82
+[DRV] Initializing SRAM B at address 1a with data a02af471
+[DRV] Initializing SRAM A at address 1b with data c18ec569
+[DRV] Initializing SRAM B at address 1b with data 519683a5
+[DRV] Initializing SRAM A at address 1c with data 6c5b8c5a
+[DRV] Initializing SRAM B at address 1c with data e6658a2
+[DRV] Initializing SRAM A at address 1d with data 245df436
+[DRV] Initializing SRAM B at address 1d with data a9345f9d
+[DRV] Initializing SRAM A at address 1e with data 3510c66
+[DRV] Initializing SRAM B at address 1e with data eea6348c
+[DRV] Initializing SRAM A at address 1f with data 85a8cf04
+[DRV] Initializing SRAM B at address 1f with data 54ae8235
+[DRV] Initializing SRAM A at address 20 with data 4322e1c4
+[DRV] Initializing SRAM B at address 20 with data 7383aff8
+[DRV] Initializing SRAM A at address 21 with data 772b73a6
+[DRV] Initializing SRAM B at address 21 with data 445daa5e
+[DRV] Initializing SRAM A at address 22 with data b4f8e35c
+[DRV] Initializing SRAM B at address 22 with data e1f25260
+[DRV] Initializing SRAM A at address 23 with data e35f9a7a
+[DRV] Initializing SRAM B at address 23 with data 46b2df76
+[DRV] Initializing SRAM A at address 24 with data 5c794961
+[DRV] Initializing SRAM B at address 24 with data 44c34065
+[DRV] Initializing SRAM A at address 25 with data ccf76feb
+[DRV] Initializing SRAM B at address 25 with data b3bc46c6
+Random Test 3: R[23:37] W[167:174] (read_range=14, write_range=7)
+[DRV] starting calculation with R: [23:37], W: [167:174]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address f with data 89f75f22
+[DRV] Initializing SRAM B at address f with data e5c0aca3
+[DRV] Initializing SRAM A at address 10 with data b105ccf
+[DRV] Initializing SRAM B at address 10 with data a6452cb1
+[DRV] Initializing SRAM A at address 11 with data 436e7cce
+[DRV] Initializing SRAM B at address 11 with data c26ab174
+[DRV] Initializing SRAM A at address 12 with data b4edd336
+[DRV] Initializing SRAM B at address 12 with data 853020ec
+[DRV] Initializing SRAM A at address 13 with data e0b68a56
+[DRV] Initializing SRAM B at address 13 with data 7d64b634
+[DRV] Initializing SRAM A at address 14 with data 97e9386c
+[DRV] Initializing SRAM B at address 14 with data b126649e
+[DRV] Initializing SRAM A at address 15 with data c50ea727
+[DRV] Initializing SRAM B at address 15 with data a83df291
+[DRV] Initializing SRAM A at address 16 with data 1a3a88dd
+[DRV] Initializing SRAM B at address 16 with data 991ba824
+[DRV] Initializing SRAM A at address 17 with data d002578b
+[DRV] Initializing SRAM B at address 17 with data c4b02d78
+[DRV] Initializing SRAM A at address 18 with data 6122598f
+[DRV] Initializing SRAM B at address 18 with data ccf1f4d8
+[DRV] Initializing SRAM A at address 19 with data eeec8826
+[DRV] Initializing SRAM B at address 19 with data 92264c91
+[DRV] Initializing SRAM A at address 1a with data ba70d3a5
+[DRV] Initializing SRAM B at address 1a with data e2f5f491
+[DRV] Initializing SRAM A at address 1b with data de6f0179
+[DRV] Initializing SRAM B at address 1b with data b31d3c0
+[DRV] Initializing SRAM A at address 1c with data 35fe1fdf
+[DRV] Initializing SRAM B at address 1c with data d612920
+[DRV] Initializing SRAM A at address 1d with data 1bfc4b61
+[DRV] Initializing SRAM B at address 1d with data 131154a5
+[DRV] Initializing SRAM A at address 1e with data 6f334216
+[DRV] Initializing SRAM B at address 1e with data 5fda13d3
+[DRV] Initializing SRAM A at address 1f with data 74f0097
+[DRV] Initializing SRAM B at address 1f with data d331ce1b
+[DRV] Initializing SRAM A at address 20 with data 868164c2
+[DRV] Initializing SRAM B at address 20 with data c4f14cf4
+[DRV] Initializing SRAM A at address 21 with data 33f09230
+[DRV] Initializing SRAM B at address 21 with data c8a8fbba
+[DRV] Initializing SRAM A at address 22 with data 4ae59475
+[DRV] Initializing SRAM B at address 22 with data a3a48b48
+[DRV] Initializing SRAM A at address 23 with data eab57b1c
+[DRV] Initializing SRAM B at address 23 with data 81bb9556
+Random Test 4: R[15:35] W[196:206] (read_range=20, write_range=10)
+[DRV] starting calculation with R: [15:35], W: [196:206]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 23 with data 1d4e3d3
+[DRV] Initializing SRAM B at address 23 with data 96fd403
+[DRV] Initializing SRAM A at address 24 with data 8f9dca7
+[DRV] Initializing SRAM B at address 24 with data 530f4631
+[DRV] Initializing SRAM A at address 25 with data 667a7881
+[DRV] Initializing SRAM B at address 25 with data d63cec62
+[DRV] Initializing SRAM A at address 26 with data 76ac1906
+[DRV] Initializing SRAM B at address 26 with data 48b74761
+[DRV] Initializing SRAM A at address 27 with data 5d544ee3
+[DRV] Initializing SRAM B at address 27 with data 49d3df0b
+[DRV] Initializing SRAM A at address 28 with data 72930eca
+[DRV] Initializing SRAM B at address 28 with data 9c3de6a8
+[DRV] Initializing SRAM A at address 29 with data 8c956c30
+[DRV] Initializing SRAM B at address 29 with data 3a88cd08
+[DRV] Initializing SRAM A at address 2a with data d1f795c6
+[DRV] Initializing SRAM B at address 2a with data d279d45e
+[DRV] Initializing SRAM A at address 2b with data 80fb8fba
+[DRV] Initializing SRAM B at address 2b with data f3158dde
+[DRV] Initializing SRAM A at address 2c with data d76ce7ac
+[DRV] Initializing SRAM B at address 2c with data f96dd518
+[DRV] Initializing SRAM A at address 2d with data 7515e71
+[DRV] Initializing SRAM B at address 2d with data 8826a711
+[DRV] Initializing SRAM A at address 2e with data e4534389
+[DRV] Initializing SRAM B at address 2e with data 15caf124
+[DRV] Initializing SRAM A at address 2f with data b5edfe5f
+[DRV] Initializing SRAM B at address 2f with data ddd0339d
+[DRV] Initializing SRAM A at address 30 with data 5a570144
+[DRV] Initializing SRAM B at address 30 with data 406a9410
+[DRV] Initializing SRAM A at address 31 with data a631222b
+[DRV] Initializing SRAM B at address 31 with data 5d13bb7c
+[DRV] Initializing SRAM A at address 32 with data acf11524
+[DRV] Initializing SRAM B at address 32 with data 73d59c22
+[DRV] Initializing SRAM A at address 33 with data 5e0c8499
+[DRV] Initializing SRAM B at address 33 with data 595dfb24
+[DRV] Initializing SRAM A at address 34 with data a2e50349
+[DRV] Initializing SRAM B at address 34 with data 9bf59df
+[DRV] Initializing SRAM A at address 35 with data e978d407
+[DRV] Initializing SRAM B at address 35 with data 26089b08
+Random Test 5: R[35:53] W[177:186] (read_range=18, write_range=9)
+[DRV] starting calculation with R: [35:53], W: [177:186]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 2d with data 546558c2
+[DRV] Initializing SRAM B at address 2d with data e5fbc066
+[DRV] Initializing SRAM A at address 2e with data fb924f60
+[DRV] Initializing SRAM B at address 2e with data 462ca1cb
+[DRV] Initializing SRAM A at address 2f with data 24b9ad1e
+[DRV] Initializing SRAM B at address 2f with data 2371890b
+[DRV] Initializing SRAM A at address 30 with data a70c1b49
+[DRV] Initializing SRAM B at address 30 with data 1a06cfa1
+[DRV] Initializing SRAM A at address 31 with data 75afc61d
+[DRV] Initializing SRAM B at address 31 with data 9ab0c018
+[DRV] Initializing SRAM A at address 32 with data c5641b4
+[DRV] Initializing SRAM B at address 32 with data 37ba07d4
+[DRV] Initializing SRAM A at address 33 with data eba2cbb0
+[DRV] Initializing SRAM B at address 33 with data f7b183a0
+[DRV] Initializing SRAM A at address 34 with data 813b95a9
+[DRV] Initializing SRAM B at address 34 with data 69ddf2fb
+[DRV] Initializing SRAM A at address 35 with data 97ab8457
+[DRV] Initializing SRAM B at address 35 with data f885de20
+[DRV] Initializing SRAM A at address 36 with data 29fe8f7e
+[DRV] Initializing SRAM B at address 36 with data b4e0bad8
+[DRV] Initializing SRAM A at address 37 with data 371dae9b
+[DRV] Initializing SRAM B at address 37 with data 98db1c01
+[DRV] Initializing SRAM A at address 38 with data f0e4fe52
+[DRV] Initializing SRAM B at address 38 with data fa8f77dc
+[DRV] Initializing SRAM A at address 39 with data 63078a94
+[DRV] Initializing SRAM B at address 39 with data ad7fd118
+[DRV] Initializing SRAM A at address 3a with data 6da9e991
+[DRV] Initializing SRAM B at address 3a with data d934ea1
+[DRV] Initializing SRAM A at address 3b with data afb79362
+[DRV] Initializing SRAM B at address 3b with data efd78e27
+[DRV] Initializing SRAM A at address 3c with data bd07a275
+[DRV] Initializing SRAM B at address 3c with data 34f23d6f
+[DRV] Initializing SRAM A at address 3d with data bc3468b6
+[DRV] Initializing SRAM B at address 3d with data 7966465c
+Random Test 6: R[45:61] W[143:151] (read_range=16, write_range=8)
+[DRV] starting calculation with R: [45:61], W: [143:151]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 3 with data 3874b251
+[DRV] Initializing SRAM B at address 3 with data a6918d
+[DRV] Initializing SRAM A at address 4 with data d8bf59af
+[DRV] Initializing SRAM B at address 4 with data 611d5a21
+[DRV] Initializing SRAM A at address 5 with data 6e1fea51
+[DRV] Initializing SRAM B at address 5 with data 3d3d1b5
+[DRV] Initializing SRAM A at address 6 with data 2c8e7e9a
+[DRV] Initializing SRAM B at address 6 with data 7fd414c5
+[DRV] Initializing SRAM A at address 7 with data d9e1d8da
+[DRV] Initializing SRAM B at address 7 with data 9cb2cf0b
+[DRV] Initializing SRAM A at address 8 with data a54fb6a
+[DRV] Initializing SRAM B at address 8 with data 8cf38003
+[DRV] Initializing SRAM A at address 9 with data 43d44885
+[DRV] Initializing SRAM B at address 9 with data 9d3ffd20
+[DRV] Initializing SRAM A at address a with data 540e05e7
+[DRV] Initializing SRAM B at address a with data 844c6dcd
+[DRV] Initializing SRAM A at address b with data e539e025
+[DRV] Initializing SRAM B at address b with data 3f87bd24
+Random Test 7: R[3:11] W[175:179] (read_range=8, write_range=4)
+[DRV] starting calculation with R: [3:11], W: [175:179]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 40 with data 7b4f7e42
+[DRV] Initializing SRAM B at address 40 with data 6da52fb9
+[DRV] Initializing SRAM A at address 41 with data c70639e9
+[DRV] Initializing SRAM B at address 41 with data f02bf5c9
+[DRV] Initializing SRAM A at address 42 with data b3411147
+[DRV] Initializing SRAM B at address 42 with data daf2df46
+[DRV] Initializing SRAM A at address 43 with data e9794036
+[DRV] Initializing SRAM B at address 43 with data e2d26d7d
+[DRV] Initializing SRAM A at address 44 with data 70e35aab
+[DRV] Initializing SRAM B at address 44 with data 4a34a632
+[DRV] Initializing SRAM A at address 45 with data 2b8ce81c
+[DRV] Initializing SRAM B at address 45 with data d290bfec
+[DRV] Initializing SRAM A at address 46 with data ab3603b4
+[DRV] Initializing SRAM B at address 46 with data 3ba71102
+[DRV] Initializing SRAM A at address 47 with data 39ef2d37
+[DRV] Initializing SRAM B at address 47 with data 8c804d63
+[DRV] Initializing SRAM A at address 48 with data b27536b5
+[DRV] Initializing SRAM B at address 48 with data 2222df27
+Random Test 8: R[64:72] W[146:150] (read_range=8, write_range=4)
+[DRV] starting calculation with R: [64:72], W: [146:150]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 1b with data 59623a80
+[DRV] Initializing SRAM B at address 1b with data 23f22b0a
+[DRV] Initializing SRAM A at address 1c with data 956a28da
+[DRV] Initializing SRAM B at address 1c with data 9583213c
+[DRV] Initializing SRAM A at address 1d with data 47dfbe0c
+[DRV] Initializing SRAM B at address 1d with data f66eba5e
+[DRV] Initializing SRAM A at address 1e with data 423ed2a3
+[DRV] Initializing SRAM B at address 1e with data 14c84d7c
+[DRV] Initializing SRAM A at address 1f with data ef957b3e
+[DRV] Initializing SRAM B at address 1f with data 71cf88d3
+[DRV] Initializing SRAM A at address 20 with data ab214f7a
+[DRV] Initializing SRAM B at address 20 with data 8e99599
+[DRV] Initializing SRAM A at address 21 with data c6ae2d9a
+[DRV] Initializing SRAM B at address 21 with data bc5cb68b
+[DRV] Initializing SRAM A at address 22 with data 9cac26f8
+[DRV] Initializing SRAM B at address 22 with data 23cbed39
+[DRV] Initializing SRAM A at address 23 with data ca13012d
+[DRV] Initializing SRAM B at address 23 with data 3876f213
+[DRV] Initializing SRAM A at address 24 with data 6bf67801
+[DRV] Initializing SRAM B at address 24 with data 1b308b31
+[DRV] Initializing SRAM A at address 25 with data fce72c13
+[DRV] Initializing SRAM B at address 25 with data f01e0de5
+[DRV] Initializing SRAM A at address 26 with data 2e10ea47
+[DRV] Initializing SRAM B at address 26 with data 8c339700
+[DRV] Initializing SRAM A at address 27 with data d80cb7f1
+[DRV] Initializing SRAM B at address 27 with data 706d45e6
+[DRV] Initializing SRAM A at address 28 with data df87cfc4
+[DRV] Initializing SRAM B at address 28 with data 4ece8651
+[DRV] Initializing SRAM A at address 29 with data a99b7b7a
+[DRV] Initializing SRAM B at address 29 with data 151b34e7
+[DRV] Initializing SRAM A at address 2a with data 7be77643
+[DRV] Initializing SRAM B at address 2a with data 39562a7c
+[DRV] Initializing SRAM A at address 2b with data e46e43ed
+[DRV] Initializing SRAM B at address 2b with data c3fb7a26
+[DRV] Initializing SRAM A at address 2c with data 534a8d6
+[DRV] Initializing SRAM B at address 2c with data 53fc6e04
+[DRV] Initializing SRAM A at address 2d with data 5f982e93
+[DRV] Initializing SRAM B at address 2d with data 187c0ecc
+Random Test 9: R[27:45] W[162:171] (read_range=18, write_range=9)
+[DRV] starting calculation with R: [27:45], W: [162:171]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 31 with data 2ebdcc9f
+[DRV] Initializing SRAM B at address 31 with data 54cb1ca0
+[DRV] Initializing SRAM A at address 32 with data e9b61904
+[DRV] Initializing SRAM B at address 32 with data f5eac1e2
+[DRV] Initializing SRAM A at address 33 with data 653fe54d
+[DRV] Initializing SRAM B at address 33 with data ae998feb
+[DRV] Initializing SRAM A at address 34 with data 366c3df5
+[DRV] Initializing SRAM B at address 34 with data 9047a55e
+[DRV] Initializing SRAM A at address 35 with data 3c7863dc
+[DRV] Initializing SRAM B at address 35 with data 55689305
+[DRV] Initializing SRAM A at address 36 with data 853632bd
+[DRV] Initializing SRAM B at address 36 with data bec6edad
+[DRV] Initializing SRAM A at address 37 with data 4637e56f
+[DRV] Initializing SRAM B at address 37 with data c38663c3
+[DRV] Initializing SRAM A at address 38 with data 16ba73dd
+[DRV] Initializing SRAM B at address 38 with data 9ffaf2b1
+[DRV] Initializing SRAM A at address 39 with data 565686c5
+[DRV] Initializing SRAM B at address 39 with data 8f2a97f7
+[DRV] Initializing SRAM A at address 3a with data 6c68bd32
+[DRV] Initializing SRAM B at address 3a with data bb229a0a
+[DRV] Initializing SRAM A at address 3b with data 4c3cbfb9
+[DRV] Initializing SRAM B at address 3b with data affc44ef
+[DRV] Initializing SRAM A at address 3c with data 69fc5d75
+[DRV] Initializing SRAM B at address 3c with data 5dabb695
+[DRV] Initializing SRAM A at address 3d with data c5baec2
+[DRV] Initializing SRAM B at address 3d with data 748c16f4
+[DRV] Initializing SRAM A at address 3e with data a6fff9bb
+[DRV] Initializing SRAM B at address 3e with data a8ac57e9
+[DRV] Initializing SRAM A at address 3f with data a9b0d473
+[DRV] Initializing SRAM B at address 3f with data 27d858ce
+[DRV] Initializing SRAM A at address 40 with data f044c0f4
+[DRV] Initializing SRAM B at address 40 with data 4e6709da
+[DRV] Initializing SRAM A at address 41 with data bf483efa
+[DRV] Initializing SRAM B at address 41 with data 66c9eb3d
+[DRV] Initializing SRAM A at address 42 with data f96d0f6e
+[DRV] Initializing SRAM B at address 42 with data ffcd03f9
+[DRV] Initializing SRAM A at address 43 with data f9b725a2
+[DRV] Initializing SRAM B at address 43 with data 25b42c80
+[DRV] Initializing SRAM A at address 44 with data 3e668251
+[DRV] Initializing SRAM B at address 44 with data 89f94910
+[DRV] Initializing SRAM A at address 45 with data d0a1f453
+[DRV] Initializing SRAM B at address 45 with data 65dccfd0
+Random Test 10: R[49:69] W[126:136] (read_range=20, write_range=10)
+[DRV] starting calculation with R: [49:69], W: [126:136]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 3e with data e89e1ac2
+[DRV] Initializing SRAM B at address 3e with data f421b796
+[DRV] Initializing SRAM A at address 3f with data bfcd93c
+[DRV] Initializing SRAM B at address 3f with data d0fb0c26
+[DRV] Initializing SRAM A at address 40 with data cf911f43
+[DRV] Initializing SRAM B at address 40 with data 93ea43b5
+[DRV] Initializing SRAM A at address 41 with data 6cdbe27a
+[DRV] Initializing SRAM B at address 41 with data 7091709f
+[DRV] Initializing SRAM A at address 42 with data 9ccef260
+[DRV] Initializing SRAM B at address 42 with data c119fb49
+Random Test 11: R[62:66] W[111:113] (read_range=4, write_range=2)
+[DRV] starting calculation with R: [62:66], W: [111:113]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 2b with data 8acd9b17
+[DRV] Initializing SRAM B at address 2b with data 9a3f6a8c
+[DRV] Initializing SRAM A at address 2c with data b707dd34
+[DRV] Initializing SRAM B at address 2c with data 893f77f7
+[DRV] Initializing SRAM A at address 2d with data 3eace45d
+[DRV] Initializing SRAM B at address 2d with data 6ee0e544
+[DRV] Initializing SRAM A at address 2e with data 7ceabfae
+[DRV] Initializing SRAM B at address 2e with data 88e5868b
+[DRV] Initializing SRAM A at address 2f with data ac489a13
+[DRV] Initializing SRAM B at address 2f with data c2c552fe
+[DRV] Initializing SRAM A at address 30 with data 16132fc8
+[DRV] Initializing SRAM B at address 30 with data 15fb5dc1
+[DRV] Initializing SRAM A at address 31 with data 86871192
+[DRV] Initializing SRAM B at address 31 with data 6d124288
+[DRV] Initializing SRAM A at address 32 with data 31bef1bc
+[DRV] Initializing SRAM B at address 32 with data 156ea1f4
+[DRV] Initializing SRAM A at address 33 with data f55af6d3
+[DRV] Initializing SRAM B at address 33 with data 8bda09ad
+[DRV] Initializing SRAM A at address 34 with data a2f3d01f
+[DRV] Initializing SRAM B at address 34 with data 2fd5643d
+[DRV] Initializing SRAM A at address 35 with data bf4107e7
+[DRV] Initializing SRAM B at address 35 with data 299accb0
+Random Test 12: R[43:53] W[165:170] (read_range=10, write_range=5)
+[DRV] starting calculation with R: [43:53], W: [165:170]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 2e with data 43dc3c56
+[DRV] Initializing SRAM B at address 2e with data 7485501f
+[DRV] Initializing SRAM A at address 2f with data e71a2bc4
+[DRV] Initializing SRAM B at address 2f with data 7dec6bf8
+[DRV] Initializing SRAM A at address 30 with data 7fddfe3c
+[DRV] Initializing SRAM B at address 30 with data 546e30c5
+[DRV] Initializing SRAM A at address 31 with data 1ae995f9
+[DRV] Initializing SRAM B at address 31 with data cad3166c
+[DRV] Initializing SRAM A at address 32 with data 94bb4de5
+[DRV] Initializing SRAM B at address 32 with data 20f9d7cc
+[DRV] Initializing SRAM A at address 33 with data bef66d1a
+[DRV] Initializing SRAM B at address 33 with data ca211998
+[DRV] Initializing SRAM A at address 34 with data 2a8d481a
+[DRV] Initializing SRAM B at address 34 with data 15fb64f3
+[DRV] Initializing SRAM A at address 35 with data c2b04bd0
+[DRV] Initializing SRAM B at address 35 with data c87011ca
+[DRV] Initializing SRAM A at address 36 with data 2476ee45
+[DRV] Initializing SRAM B at address 36 with data 6c347cf3
+[DRV] Initializing SRAM A at address 37 with data 5f4d4121
+[DRV] Initializing SRAM B at address 37 with data ec09a609
+[DRV] Initializing SRAM A at address 38 with data 8a24a1e6
+[DRV] Initializing SRAM B at address 38 with data bed21103
+[DRV] Initializing SRAM A at address 39 with data 5953c3ec
+[DRV] Initializing SRAM B at address 39 with data b25d8798
+[DRV] Initializing SRAM A at address 3a with data a150101d
+[DRV] Initializing SRAM B at address 3a with data 20ef1654
+[DRV] Initializing SRAM A at address 3b with data 72121670
+[DRV] Initializing SRAM B at address 3b with data 1d8e6178
+[DRV] Initializing SRAM A at address 3c with data 37428d25
+[DRV] Initializing SRAM B at address 3c with data e3102d94
+[DRV] Initializing SRAM A at address 3d with data 92619c4
+[DRV] Initializing SRAM B at address 3d with data 91e6b7e4
+[DRV] Initializing SRAM A at address 3e with data 1a4cdfd5
+[DRV] Initializing SRAM B at address 3e with data 8a63a6c
+Random Test 13: R[46:62] W[109:117] (read_range=16, write_range=8)
+[DRV] starting calculation with R: [46:62], W: [109:117]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 47 with data 9d235096
+[DRV] Initializing SRAM B at address 47 with data 9437457f
+[DRV] Initializing SRAM A at address 48 with data 3412f8f4
+[DRV] Initializing SRAM B at address 48 with data 9e92f433
+[DRV] Initializing SRAM A at address 49 with data 785bcc5f
+[DRV] Initializing SRAM B at address 49 with data 79ecd454
+[DRV] Initializing SRAM A at address 4a with data fc72195d
+[DRV] Initializing SRAM B at address 4a with data e23862e3
+[DRV] Initializing SRAM A at address 4b with data c441fbb3
+[DRV] Initializing SRAM B at address 4b with data de6ae86b
+[DRV] Initializing SRAM A at address 4c with data b92b092f
+[DRV] Initializing SRAM B at address 4c with data 7bd12db2
+[DRV] Initializing SRAM A at address 4d with data 13c38939
+[DRV] Initializing SRAM B at address 4d with data 6534e922
+[DRV] Initializing SRAM A at address 4e with data 774bc319
+[DRV] Initializing SRAM B at address 4e with data 71ad50f7
+[DRV] Initializing SRAM A at address 4f with data 3aedaf08
+[DRV] Initializing SRAM B at address 4f with data 747fe28
+[DRV] Initializing SRAM A at address 50 with data 1cba15f7
+[DRV] Initializing SRAM B at address 50 with data ed580c15
+[DRV] Initializing SRAM A at address 51 with data 5a65ec21
+[DRV] Initializing SRAM B at address 51 with data ea9e20f4
+[DRV] Initializing SRAM A at address 52 with data ebbe7250
+[DRV] Initializing SRAM B at address 52 with data 4b1acafa
+[DRV] Initializing SRAM A at address 53 with data 5aee69f1
+[DRV] Initializing SRAM B at address 53 with data 29ae5e4a
+Random Test 14: R[71:83] W[199:205] (read_range=12, write_range=6)
+[DRV] starting calculation with R: [71:83], W: [199:205]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 5 with data 77f62ac1
+[DRV] Initializing SRAM B at address 5 with data e4b65ac5
+[DRV] Initializing SRAM A at address 6 with data 900f470a
+[DRV] Initializing SRAM B at address 6 with data 90372787
+[DRV] Initializing SRAM A at address 7 with data 2978f6bc
+[DRV] Initializing SRAM B at address 7 with data 976c764d
+[DRV] Initializing SRAM A at address 8 with data cd361408
+[DRV] Initializing SRAM B at address 8 with data ebf760c6
+[DRV] Initializing SRAM A at address 9 with data a4b0d558
+[DRV] Initializing SRAM B at address 9 with data 1647da8a
+Random Test 15: R[5:9] W[176:178] (read_range=4, write_range=2)
+[DRV] starting calculation with R: [5:9], W: [176:178]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 29 with data 3221e843
+[DRV] Initializing SRAM B at address 29 with data 6e126b5c
+[DRV] Initializing SRAM A at address 2a with data c26f2416
+[DRV] Initializing SRAM B at address 2a with data 2d7e367e
+[DRV] Initializing SRAM A at address 2b with data 1cd5ef59
+[DRV] Initializing SRAM B at address 2b with data 2d8e9b5f
+[DRV] Initializing SRAM A at address 2c with data 2c9c4a3f
+[DRV] Initializing SRAM B at address 2c with data a60c9878
+[DRV] Initializing SRAM A at address 2d with data 33e421b0
+[DRV] Initializing SRAM B at address 2d with data 64d95205
+[DRV] Initializing SRAM A at address 2e with data 71161f96
+[DRV] Initializing SRAM B at address 2e with data 76c97632
+[DRV] Initializing SRAM A at address 2f with data 9228fdeb
+[DRV] Initializing SRAM B at address 2f with data 44401209
+[DRV] Initializing SRAM A at address 30 with data 31966885
+[DRV] Initializing SRAM B at address 30 with data bd8ec31c
+[DRV] Initializing SRAM A at address 31 with data 591a399d
+[DRV] Initializing SRAM B at address 31 with data f30cf1f3
+[DRV] Initializing SRAM A at address 32 with data c6309d23
+[DRV] Initializing SRAM B at address 32 with data 34f58136
+[DRV] Initializing SRAM A at address 33 with data 6c4b66c3
+[DRV] Initializing SRAM B at address 33 with data 97041d98
+[DRV] Initializing SRAM A at address 34 with data 70d6a6b4
+[DRV] Initializing SRAM B at address 34 with data 73d11a89
+[DRV] Initializing SRAM A at address 35 with data 9ceb4946
+[DRV] Initializing SRAM B at address 35 with data 4bea8799
+[DRV] Initializing SRAM A at address 36 with data d44d28
+[DRV] Initializing SRAM B at address 36 with data 1cb2eaac
+[DRV] Initializing SRAM A at address 37 with data 4544dc7b
+[DRV] Initializing SRAM B at address 37 with data afccae1
+[DRV] Initializing SRAM A at address 38 with data e6545499
+[DRV] Initializing SRAM B at address 38 with data fd64f842
+[DRV] Initializing SRAM A at address 39 with data 543e08a4
+[DRV] Initializing SRAM B at address 39 with data 82723c2a
+[DRV] Initializing SRAM A at address 3a with data b5da4acf
+[DRV] Initializing SRAM B at address 3a with data 1e6fde78
+[DRV] Initializing SRAM A at address 3b with data c8db086e
+[DRV] Initializing SRAM B at address 3b with data dd042b77
+Random Test 16: R[41:59] W[108:117] (read_range=18, write_range=9)
+[DRV] starting calculation with R: [41:59], W: [108:117]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 44 with data d544f6bf
+[DRV] Initializing SRAM B at address 44 with data ecd3460d
+[DRV] Initializing SRAM A at address 45 with data 1c4859d2
+[DRV] Initializing SRAM B at address 45 with data 3882b58c
+[DRV] Initializing SRAM A at address 46 with data 2886f78f
+[DRV] Initializing SRAM B at address 46 with data 27703b63
+[DRV] Initializing SRAM A at address 47 with data 2034a9e3
+[DRV] Initializing SRAM B at address 47 with data 95803f9b
+[DRV] Initializing SRAM A at address 48 with data f5e5748f
+[DRV] Initializing SRAM B at address 48 with data 5015017d
+[DRV] Initializing SRAM A at address 49 with data 4c9ad31
+[DRV] Initializing SRAM B at address 49 with data c3b78981
+[DRV] Initializing SRAM A at address 4a with data c6a38213
+[DRV] Initializing SRAM B at address 4a with data 496647f5
+[DRV] Initializing SRAM A at address 4b with data 9f88abb4
+[DRV] Initializing SRAM B at address 4b with data 6fbb0c6e
+[DRV] Initializing SRAM A at address 4c with data 7b5bd519
+[DRV] Initializing SRAM B at address 4c with data 5bc2c1f2
+[DRV] Initializing SRAM A at address 4d with data b90a06d2
+[DRV] Initializing SRAM B at address 4d with data 1d981be0
+[DRV] Initializing SRAM A at address 4e with data 9f8720cd
+[DRV] Initializing SRAM B at address 4e with data 94c51fa5
+[DRV] Initializing SRAM A at address 4f with data 58872edd
+[DRV] Initializing SRAM B at address 4f with data 405a371f
+[DRV] Initializing SRAM A at address 50 with data 2cfc2407
+[DRV] Initializing SRAM B at address 50 with data 16c837ce
+[DRV] Initializing SRAM A at address 51 with data 7f524891
+[DRV] Initializing SRAM B at address 51 with data 41858abe
+[DRV] Initializing SRAM A at address 52 with data bf6a66ca
+[DRV] Initializing SRAM B at address 52 with data 585e6136
+[DRV] Initializing SRAM A at address 53 with data 54598299
+[DRV] Initializing SRAM B at address 53 with data 789ca21f
+[DRV] Initializing SRAM A at address 54 with data 37dfa7c5
+[DRV] Initializing SRAM B at address 54 with data 53d7fc35
+[DRV] Initializing SRAM A at address 55 with data bfa81b08
+[DRV] Initializing SRAM B at address 55 with data 129c48ee
+[DRV] Initializing SRAM A at address 56 with data d043f9d4
+[DRV] Initializing SRAM B at address 56 with data a6bf2c2b
+Random Test 17: R[68:86] W[116:125] (read_range=18, write_range=9)
+[DRV] starting calculation with R: [68:86], W: [116:125]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 5 with data 863ccad9
+[DRV] Initializing SRAM B at address 5 with data 12f638fa
+[DRV] Initializing SRAM A at address 6 with data 673d6282
+[DRV] Initializing SRAM B at address 6 with data 146a4b97
+[DRV] Initializing SRAM A at address 7 with data 378396b0
+[DRV] Initializing SRAM B at address 7 with data a86a1566
+[DRV] Initializing SRAM A at address 8 with data 5eb5cafc
+[DRV] Initializing SRAM B at address 8 with data 684157e2
+[DRV] Initializing SRAM A at address 9 with data 415f361b
+[DRV] Initializing SRAM B at address 9 with data 6832bd49
+[DRV] Initializing SRAM A at address a with data 148d41d4
+[DRV] Initializing SRAM B at address a with data 378fd63
+[DRV] Initializing SRAM A at address b with data b12577a3
+[DRV] Initializing SRAM B at address b with data 1dfd0d0e
+[DRV] Initializing SRAM A at address c with data c307a62c
+[DRV] Initializing SRAM B at address c with data 97dbe48b
+[DRV] Initializing SRAM A at address d with data 6fe4ab60
+[DRV] Initializing SRAM B at address d with data 6e952889
+[DRV] Initializing SRAM A at address e with data 51e00f6f
+[DRV] Initializing SRAM B at address e with data c813c1f4
+[DRV] Initializing SRAM A at address f with data 61e85c73
+[DRV] Initializing SRAM B at address f with data e361307d
+[DRV] Initializing SRAM A at address 10 with data 2dd2ded7
+[DRV] Initializing SRAM B at address 10 with data ab2623e6
+[DRV] Initializing SRAM A at address 11 with data 76383a8a
+[DRV] Initializing SRAM B at address 11 with data 65e4a815
+[DRV] Initializing SRAM A at address 12 with data 101400e7
+[DRV] Initializing SRAM B at address 12 with data bff3efd5
+[DRV] Initializing SRAM A at address 13 with data a6193361
+[DRV] Initializing SRAM B at address 13 with data 2b3d8a6c
+[DRV] Initializing SRAM A at address 14 with data b5d65ef0
+[DRV] Initializing SRAM B at address 14 with data 50b98fe0
+[DRV] Initializing SRAM A at address 15 with data e48bbc3d
+[DRV] Initializing SRAM B at address 15 with data fa71007
+[DRV] Initializing SRAM A at address 16 with data 87c8808e
+[DRV] Initializing SRAM B at address 16 with data 468fd052
+[DRV] Initializing SRAM A at address 17 with data fdc94b71
+[DRV] Initializing SRAM B at address 17 with data 61f92457
+Random Test 18: R[5:23] W[125:134] (read_range=18, write_range=9)
+[DRV] starting calculation with R: [5:23], W: [125:134]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 9 with data 744c74b
+[DRV] Initializing SRAM B at address 9 with data a84ad445
+[DRV] Initializing SRAM A at address a with data 340d389d
+[DRV] Initializing SRAM B at address a with data 4ede6b96
+[DRV] Initializing SRAM A at address b with data 79efa067
+[DRV] Initializing SRAM B at address b with data 8d1bbcf0
+[DRV] Initializing SRAM A at address c with data a7ea00e7
+[DRV] Initializing SRAM B at address c with data 45b1f178
+[DRV] Initializing SRAM A at address d with data 8a588bf7
+[DRV] Initializing SRAM B at address d with data 4d31ff41
+[DRV] Initializing SRAM A at address e with data cce865dc
+[DRV] Initializing SRAM B at address e with data c36ae3f6
+[DRV] Initializing SRAM A at address f with data b25c52d4
+[DRV] Initializing SRAM B at address f with data 287ff848
+Random Test 19: R[9:15] W[153:156] (read_range=6, write_range=3)
+[DRV] starting calculation with R: [9:15], W: [153:156]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 36 with data 9d90a79b
+[DRV] Initializing SRAM B at address 36 with data 1a3f8bf0
+[DRV] Initializing SRAM A at address 37 with data a5e0f4ea
+[DRV] Initializing SRAM B at address 37 with data 4e0b005e
+[DRV] Initializing SRAM A at address 38 with data 5d66e906
+[DRV] Initializing SRAM B at address 38 with data 33115b5d
+[DRV] Initializing SRAM A at address 39 with data 41186616
+[DRV] Initializing SRAM B at address 39 with data 8504c867
+[DRV] Initializing SRAM A at address 3a with data d965891a
+[DRV] Initializing SRAM B at address 3a with data e0e8c82b
+[DRV] Initializing SRAM A at address 3b with data 73575156
+[DRV] Initializing SRAM B at address 3b with data 5293c8de
+[DRV] Initializing SRAM A at address 3c with data f16b0c7f
+[DRV] Initializing SRAM B at address 3c with data 2fe0c141
+[DRV] Initializing SRAM A at address 3d with data 902cb3a7
+[DRV] Initializing SRAM B at address 3d with data 7db2da70
+[DRV] Initializing SRAM A at address 3e with data 3a9424e7
+[DRV] Initializing SRAM B at address 3e with data daaef46f
+[DRV] Initializing SRAM A at address 3f with data ca22e5d0
+[DRV] Initializing SRAM B at address 3f with data abb59173
+[DRV] Initializing SRAM A at address 40 with data 4eb9da90
+[DRV] Initializing SRAM B at address 40 with data 62573f3
+[DRV] Initializing SRAM A at address 41 with data 3a3d1de5
+[DRV] Initializing SRAM B at address 41 with data 93cffb6c
+[DRV] Initializing SRAM A at address 42 with data bede5c5
+[DRV] Initializing SRAM B at address 42 with data 6cb50bf5
+[DRV] Initializing SRAM A at address 43 with data d78020c9
+[DRV] Initializing SRAM B at address 43 with data a28a0c88
+[DRV] Initializing SRAM A at address 44 with data c400385c
+[DRV] Initializing SRAM B at address 44 with data f9e9480d
+Random Test 20: R[54:68] W[171:178] (read_range=14, write_range=7)
+[DRV] starting calculation with R: [54:68], W: [171:178]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 3c with data 95318b55
+[DRV] Initializing SRAM B at address 3c with data 655e23be
+[DRV] Initializing SRAM A at address 3d with data 24915698
+[DRV] Initializing SRAM B at address 3d with data 265ceae3
+[DRV] Initializing SRAM A at address 3e with data 4e6d6fb9
+[DRV] Initializing SRAM B at address 3e with data f8a261dc
+[DRV] Initializing SRAM A at address 3f with data 9c3bbc26
+[DRV] Initializing SRAM B at address 3f with data b103e5bb
+[DRV] Initializing SRAM A at address 40 with data ff0637c3
+[DRV] Initializing SRAM B at address 40 with data e92f291a
+[DRV] Initializing SRAM A at address 41 with data 60e5c137
+[DRV] Initializing SRAM B at address 41 with data 7483f440
+[DRV] Initializing SRAM A at address 42 with data c43928f9
+[DRV] Initializing SRAM B at address 42 with data 8b31615
+[DRV] Initializing SRAM A at address 43 with data 2ca88f18
+[DRV] Initializing SRAM B at address 43 with data b61871c6
+[DRV] Initializing SRAM A at address 44 with data 4ddbdbcd
+[DRV] Initializing SRAM B at address 44 with data 8bd7d536
+[DRV] Initializing SRAM A at address 45 with data bbf8dec0
+[DRV] Initializing SRAM B at address 45 with data 83b90429
+[DRV] Initializing SRAM A at address 46 with data 19e0611b
+[DRV] Initializing SRAM B at address 46 with data 91c32431
+[DRV] Initializing SRAM A at address 47 with data 81273651
+[DRV] Initializing SRAM B at address 47 with data 739a7555
+[DRV] Initializing SRAM A at address 48 with data 1fd617ad
+[DRV] Initializing SRAM B at address 48 with data 9b970386
+[DRV] Initializing SRAM A at address 49 with data c7e2d69c
+[DRV] Initializing SRAM B at address 49 with data 53abbcc0
+[DRV] Initializing SRAM A at address 4a with data ec6931b9
+[DRV] Initializing SRAM B at address 4a with data f3f21801
+[DRV] Initializing SRAM A at address 4b with data 48b1589b
+[DRV] Initializing SRAM B at address 4b with data c91738ed
+[DRV] Initializing SRAM A at address 4c with data 2cdfea60
+[DRV] Initializing SRAM B at address 4c with data 66d3c3c
+[DRV] Initializing SRAM A at address 4d with data 2c79faf7
+[DRV] Initializing SRAM B at address 4d with data dfc818e9
+[DRV] Initializing SRAM A at address 4e with data aa9b6b2f
+[DRV] Initializing SRAM B at address 4e with data a71e421b
+Random Test 21: R[60:78] W[152:161] (read_range=18, write_range=9)
+[DRV] starting calculation with R: [60:78], W: [152:161]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 14 with data 40dfe0fe
+[DRV] Initializing SRAM B at address 14 with data 43081f04
+[DRV] Initializing SRAM A at address 15 with data 2aac1905
+[DRV] Initializing SRAM B at address 15 with data b682af8b
+[DRV] Initializing SRAM A at address 16 with data 20e036ea
+[DRV] Initializing SRAM B at address 16 with data 64fca196
+[DRV] Initializing SRAM A at address 17 with data db32a211
+[DRV] Initializing SRAM B at address 17 with data c4260e02
+[DRV] Initializing SRAM A at address 18 with data 69975bdc
+[DRV] Initializing SRAM B at address 18 with data 583d9a1f
+[DRV] Initializing SRAM A at address 19 with data 110d2b0c
+[DRV] Initializing SRAM B at address 19 with data 18b6d171
+[DRV] Initializing SRAM A at address 1a with data b32ca2d6
+[DRV] Initializing SRAM B at address 1a with data 8dac3129
+[DRV] Initializing SRAM A at address 1b with data 4c6d21c5
+[DRV] Initializing SRAM B at address 1b with data 12086163
+[DRV] Initializing SRAM A at address 1c with data d537a455
+[DRV] Initializing SRAM B at address 1c with data 6673d81f
+[DRV] Initializing SRAM A at address 1d with data 91ac074a
+[DRV] Initializing SRAM B at address 1d with data 80fee200
+[DRV] Initializing SRAM A at address 1e with data 9c3715d4
+[DRV] Initializing SRAM B at address 1e with data 458dccc6
+[DRV] Initializing SRAM A at address 1f with data 36d27f62
+[DRV] Initializing SRAM B at address 1f with data 9307af8a
+[DRV] Initializing SRAM A at address 20 with data 2f1a9147
+[DRV] Initializing SRAM B at address 20 with data d13e0cbd
+[DRV] Initializing SRAM A at address 21 with data 61135010
+[DRV] Initializing SRAM B at address 21 with data eb9d49e0
+[DRV] Initializing SRAM A at address 22 with data 24ba4ca2
+[DRV] Initializing SRAM B at address 22 with data 6495b902
+[DRV] Initializing SRAM A at address 23 with data 324e5115
+[DRV] Initializing SRAM B at address 23 with data edc7affd
+[DRV] Initializing SRAM A at address 24 with data 495cc152
+[DRV] Initializing SRAM B at address 24 with data b0f0e96f
+[DRV] Initializing SRAM A at address 25 with data a68d4b6d
+[DRV] Initializing SRAM B at address 25 with data 35962b78
+[DRV] Initializing SRAM A at address 26 with data 143143c1
+[DRV] Initializing SRAM B at address 26 with data 8f76f036
+[DRV] Initializing SRAM A at address 27 with data 2189c8ce
+[DRV] Initializing SRAM B at address 27 with data 41aa8c03
+[DRV] Initializing SRAM A at address 28 with data ccd78ad5
+[DRV] Initializing SRAM B at address 28 with data 29c0d6b
+Random Test 22: R[20:40] W[162:172] (read_range=20, write_range=10)
+[DRV] starting calculation with R: [20:40], W: [162:172]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 4a with data 705a4794
+[DRV] Initializing SRAM B at address 4a with data 7942a6bb
+[DRV] Initializing SRAM A at address 4b with data 4a4368e6
+[DRV] Initializing SRAM B at address 4b with data 6bff311
+[DRV] Initializing SRAM A at address 4c with data a2b6fdf9
+[DRV] Initializing SRAM B at address 4c with data b263df7
+[DRV] Initializing SRAM A at address 4d with data 7fe6b226
+[DRV] Initializing SRAM B at address 4d with data b38d5088
+[DRV] Initializing SRAM A at address 4e with data 8dbef9ab
+[DRV] Initializing SRAM B at address 4e with data 69fa9100
+[DRV] Initializing SRAM A at address 4f with data d0bd77d8
+[DRV] Initializing SRAM B at address 4f with data e29ba7cc
+[DRV] Initializing SRAM A at address 50 with data 6c91f5f9
+[DRV] Initializing SRAM B at address 50 with data d2c5d352
+[DRV] Initializing SRAM A at address 51 with data 1a74d701
+[DRV] Initializing SRAM B at address 51 with data 4db0b680
+[DRV] Initializing SRAM A at address 52 with data ab48b3f9
+[DRV] Initializing SRAM B at address 52 with data 82ef2e14
+[DRV] Initializing SRAM A at address 53 with data b1738d2d
+[DRV] Initializing SRAM B at address 53 with data 5aaf78af
+[DRV] Initializing SRAM A at address 54 with data 2e7abc11
+[DRV] Initializing SRAM B at address 54 with data 2bb6bd9a
+[DRV] Initializing SRAM A at address 55 with data e05e91f7
+[DRV] Initializing SRAM B at address 55 with data 8718be54
+[DRV] Initializing SRAM A at address 56 with data 8ab74f71
+[DRV] Initializing SRAM B at address 56 with data d5b83ee2
+Random Test 23: R[74:86] W[156:162] (read_range=12, write_range=6)
+[DRV] starting calculation with R: [74:86], W: [156:162]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 2c with data 9a8a2b6a
+[DRV] Initializing SRAM B at address 2c with data f5d5be8d
+[DRV] Initializing SRAM A at address 2d with data 4ed6a77e
+[DRV] Initializing SRAM B at address 2d with data 285037f0
+[DRV] Initializing SRAM A at address 2e with data a85572b5
+[DRV] Initializing SRAM B at address 2e with data 8c2736e4
+[DRV] Initializing SRAM A at address 2f with data 8fc01456
+[DRV] Initializing SRAM B at address 2f with data a3c18067
+[DRV] Initializing SRAM A at address 30 with data e8208c1
+[DRV] Initializing SRAM B at address 30 with data 1c7c969b
+[DRV] Initializing SRAM A at address 31 with data 423607b5
+[DRV] Initializing SRAM B at address 31 with data f58b02f3
+[DRV] Initializing SRAM A at address 32 with data fddd2d63
+[DRV] Initializing SRAM B at address 32 with data fa90711e
+[DRV] Initializing SRAM A at address 33 with data 54e11235
+[DRV] Initializing SRAM B at address 33 with data 2dfa86b4
+[DRV] Initializing SRAM A at address 34 with data bcc9d5d
+[DRV] Initializing SRAM B at address 34 with data 7f1d23a4
+[DRV] Initializing SRAM A at address 35 with data aac71e1f
+[DRV] Initializing SRAM B at address 35 with data e815775b
+[DRV] Initializing SRAM A at address 36 with data add3f7dd
+[DRV] Initializing SRAM B at address 36 with data cf5a16b3
+[DRV] Initializing SRAM A at address 37 with data ec7ece4
+[DRV] Initializing SRAM B at address 37 with data 4921fea1
+[DRV] Initializing SRAM A at address 38 with data 250fd3fb
+[DRV] Initializing SRAM B at address 38 with data 94782f9b
+[DRV] Initializing SRAM A at address 39 with data 972044a6
+[DRV] Initializing SRAM B at address 39 with data f01e4dcc
+[DRV] Initializing SRAM A at address 3a with data d9bc863d
+[DRV] Initializing SRAM B at address 3a with data a32471f8
+Random Test 24: R[44:58] W[115:122] (read_range=14, write_range=7)
+[DRV] starting calculation with R: [44:58], W: [115:122]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 9 with data 884916d1
+[DRV] Initializing SRAM B at address 9 with data a419b333
+[DRV] Initializing SRAM A at address a with data 508c5922
+[DRV] Initializing SRAM B at address a with data 5c7d2c78
+[DRV] Initializing SRAM A at address b with data 18ee8732
+[DRV] Initializing SRAM B at address b with data 69b9e2c2
+[DRV] Initializing SRAM A at address c with data 96b77d40
+[DRV] Initializing SRAM B at address c with data 18a6b7fe
+[DRV] Initializing SRAM A at address d with data 72f617a4
+[DRV] Initializing SRAM B at address d with data e748e6e2
+[DRV] Initializing SRAM A at address e with data 613cf35e
+[DRV] Initializing SRAM B at address e with data d0ea615b
+[DRV] Initializing SRAM A at address f with data 3816555f
+[DRV] Initializing SRAM B at address f with data 61fce3b4
+Random Test 25: R[9:15] W[133:136] (read_range=6, write_range=3)
+[DRV] starting calculation with R: [9:15], W: [133:136]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+=== TEST PLAN: FSM Coverage Tests ===
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] Initializing SRAM A at address 40 with data 100
+[DRV] Initializing SRAM B at address 40 with data 200
+[DRV] Initializing SRAM A at address 41 with data 101
+[DRV] Initializing SRAM B at address 41 with data 201
+[DRV] Initializing SRAM A at address 42 with data 102
+[DRV] Initializing SRAM B at address 42 with data 202
+[DRV] Initializing SRAM A at address 43 with data 103
+[DRV] Initializing SRAM B at address 43 with data 203
+[DRV] Initializing SRAM A at address 44 with data 104
+[DRV] Initializing SRAM B at address 44 with data 204
+[DRV] Initializing SRAM A at address 45 with data 105
+[DRV] Initializing SRAM B at address 45 with data 205
+[DRV] Initializing SRAM A at address 46 with data 106
+[DRV] Initializing SRAM B at address 46 with data 206
+[DRV] Initializing SRAM A at address 47 with data 107
+[DRV] Initializing SRAM B at address 47 with data 207
+[DRV] starting calculation with R: [64:71], W: [80:83]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+Testing invalid ranges - DUT should go to END state
+[DRV] starting calculation with R: [256:153], W: [272:265]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+[DRV] starting calculation with R: [133:132], W: [149:151]
+[DRV] Applying reset...
+[DRV] Reset deasserted, DUT should be in IDLE
+=== ALL TEST PLAN REQUIREMENTS COMPLETED ===
+Simulation complete via $finish(1) at time 12655 NS + 0
+./sym_links/calc_tb_top.sv:193         $finish;
+xcelium> exit
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  calc_tb_top(calc_tb_top)
+  scope    :  scope
+  testname :  test
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_2cd46bcb_3e086c46.ucm
+  data               :  ./cov_work/scope/test/icc_2cd46bcb_3e086c46.ucd
+TOOL:	xrun(64)	25.03-s003: Exiting on Sep 27, 2025 at 20:16:17 EDT  (total: 00:00:02)
